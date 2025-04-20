@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "org.customer.details";
+
+service  CustomerDetails{
+   rpc getCustomerDetails(CustomerRequest) returns (CustomerResponse);
+}
+
+message CustomerRequest{
+  int32 customer_id=1;
+}
+
+message CustomerResponse{
+  int32 customer_id=1;
+  string customer_name=2;
+  string acc_type=3;
+  string balance=4;
+}
