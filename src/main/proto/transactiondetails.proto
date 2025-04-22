@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+option java_package = "org.customer.details";
+
+service TransctionDetails{
+   rpc getTransactionDetails(TransactionDetailsRequest) returns (TransactionDetailsResponse);
+   rpc setTransactionDetails(AddTransactionDetails) returns (AddedTransactionDetailsRespone);
+}
+
+message TransactionDetailsRequest{
+  int32 customerId=1;
+}
+
+message TransactionDetailsResponse{
+  int32 transactionId=1;
+  string accountId=2;
+  string type=3;
+  double amount=4;
+  string description=5;
+  google.protobuf.Timestamp transactionDate=6;
+  string category=7;
+}
+
+message AddTransactionDetails{
+  int32 transactionId=1;
+  string accountId=2;
+  string type=3;
+  double amount=4;
+  string description=5;
+  google.protobuf.Timestamp transactionDate=6;
+  string category=7;
+}
+
+message AddedTransactionDetailsRespone{
+  string response=1;
+}
