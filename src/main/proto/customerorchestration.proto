@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "customerdetails.proto";
+import "financialdetails.proto";
+import "interactiondetails.proto";
+import "preferencedetails.proto";
+import "transactiondetails.proto";
+import "google/protobuf/timestamp.proto";
+option java_package = "org.customer.details";
+
+service CustomerOrchestrarionDetails{
+  rpc getCustomerOrchestration(CustomerRequest) returns (CustomerOrchestrationResponse);
+}
+
+message CustomerRequest{
+  int32 customerId=1;
+}
+
+message CustomerOrchestrationResponse{
+  customer.profile.CustomerProfileResponse customerProfile=1;
+  financial.details.FinancialDetailsResponse financialDetails=2;
+  interaction.details.InteractionDetailsResponse interactionDetails=3;
+  preference.details.PreferenceDetailsResponse preferenceDetails=4;
+  transaction.details.TransactionDetailsResponse transactionDetails=5;
+}

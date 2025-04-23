@@ -8,16 +8,18 @@ import org.example.model.CustomerProfileData;
 import org.example.repository.CustomerProfileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.grpc.server.service.GrpcService;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@GrpcService
+//@GrpcService
+@Service
 public class CustomerProfileService extends CustomerDetailsGrpc.CustomerDetailsImplBase {
 
     @Autowired
     CustomerProfileRepo customerProfileRepo;
-    @Override
-    public void getCustomerProfile(Customerdetails.CustomerProfileRequest request, StreamObserver<Customerdetails.CustomerProfileResponse> responseObserver) {
+
+    public Customerdetails.CustomerProfileResponse getCustomerProfile(Customerdetails.CustomerProfileRequest request) {
 
         CustomerProfileData response = customerProfileRepo.findById(request.getCustomerId()).orElseThrow();
 
@@ -31,9 +33,8 @@ public class CustomerProfileService extends CustomerDetailsGrpc.CustomerDetailsI
                 .setCustomerSegment(response.getCustomerSegment())
                 .setCreatedDate(dateToTimestamp(response.getCreatedDate()))
                 .build();
+        return profileResponse;
 
-        responseObserver.onNext(profileResponse);
-        responseObserver.onCompleted();
     }
 
     @Override

@@ -12,8 +12,10 @@ public class TransactionData {
     private int transactionId;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerId")
+    private int customerId;
     @Column(name = "accountId")
-    private int accountId;
+    private String accountId;
     @Column(name = "type")
     private String type;
     @Column(name = "amount")
@@ -33,11 +35,19 @@ public class TransactionData {
         this.transactionId = transactionId;
     }
 
-    public int getAccountId() {
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
